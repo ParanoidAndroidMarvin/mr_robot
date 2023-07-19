@@ -15,6 +15,9 @@ SLEEP_WORDS = ["computer go to sleep", "good night"]
 LANGUAGE = "en-us"
 
 # Text generator
+USER_NAME = "Marvin"
+AI_NAME = "Computer"
+LANGUAGE_MODEL_BASE_PATH = "./models/"
 LANGUAGE_MODEL = "ggml-mpt-7b-chat.bin"
 
 # Text to speech
