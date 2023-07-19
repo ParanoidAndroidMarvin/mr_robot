@@ -2,6 +2,10 @@ from config import BANNER, WAKE_WORD, SLEEP_WORD
 from text_to_speech import say
 from text_generator import answer
 from speech_to_text import wait_for_wakeup, listen
+from colorama import Fore, Style
+
+# Setup console styling
+print(Fore.GREEN + Style.BRIGHT)
 
 
 def main():
