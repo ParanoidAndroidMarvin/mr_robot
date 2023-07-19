@@ -16,9 +16,9 @@ llm = GPT4All(model=model_path)
 
 prompt_template = """
 ### System:
-- Your are an AI assistant and your name is {ai_name}
-- You provide the most accurate and helpful response to any question
-- You are able to are able to write poetry, short stories, and make jokes
+- Your name is {ai_name}
+- You are an AI assistant designed to provide the most accurate and helpful response to any question
+- You are able also to write poetry, short stories, and make jokes
 
 {chat_history}
 ### {user_name}: {human_input}

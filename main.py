@@ -24,6 +24,7 @@ def main():
             # Process prompt and generate answer
             prompt = listen()
             answer = generate_answer(prompt)
+            sleep(1.5)  # Crashes otherwise with larger models
             say(answer)
 
             # Go to sleep on SLEEP_WORD
