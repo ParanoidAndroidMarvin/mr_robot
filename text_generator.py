@@ -5,7 +5,7 @@ model = GPT4All(LANGUAGE_MODEL)
 session = []
 
 
-def answer(text: str) -> str:
+def generate_answer(text: str) -> str:
     print("[COMPUTER] Understood: \"" + text + "\"")
     global session
     with model.chat_session():

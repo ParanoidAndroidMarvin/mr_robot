@@ -1,6 +1,6 @@
-from config import BANNER, WAKE_WORD, SLEEP_WORD
+from config import BANNER, SLEEP_WORDS
 from text_to_speech import say
-from text_generator import answer
+from text_generator import generate_answer
 from speech_to_text import wait_for_wakeup, listen
 from colorama import Fore, Style
 
@@ -13,15 +13,18 @@ def main():
     try:
         sleeping = True
         while True:
+            # Wait for WAKE_WORD
             if sleeping:
-                wait_for_wakeup(WAKE_WORD)
+                wait_for_wakeup()
                 sleeping = False
 
-            text_input = listen()
-            text_answer = answer(text_input)
-            say(text_answer)
+            # Process prompt and generate answer
+            prompt = listen()
+            answer = generate_answer(prompt)
+            say(answer)
 
-            if SLEEP_WORD in text_input:
+            # Go to sleep on SLEEP_WORD
+            if any(sleep_word in prompt for sleep_word in SLEEP_WORDS):
                 sleeping = True
                 continue
 
