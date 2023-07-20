@@ -17,8 +17,10 @@ multidict==6.0.4
 mypy-extensions==1.0.0
 numexpr==2.8.4
 numpy==1.25.1
+openai==0.27.8
 openapi-schema-pydantic==1.2.4
 packaging==23.1
+pi==0.1.2
 pycparser==2.21
 pydantic==1.10.11
 pyobjc==9.2
@@ -172,6 +174,7 @@ pyobjc-framework-VideoToolbox==9.2
 pyobjc-framework-Virtualization==9.2
 pyobjc-framework-Vision==9.2
 pyobjc-framework-WebKit==9.2
+python-dotenv==1.0.0
 pyttsx4==3.0.15
 PyYAML==6.0.1
 requests==2.31.0
