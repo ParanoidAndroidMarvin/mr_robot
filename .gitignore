@@ -1,4 +1,10 @@
+# Directories
 /venv/
+/models/
+
+# Intellij Project Files
 /.idea/
 /mr_robot.iml
-/models/
+
+/.env
+

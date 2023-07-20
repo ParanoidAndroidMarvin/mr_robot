@@ -1,10 +1,10 @@
 import pyttsx4
 
 from threading import Thread
-from config import VOICE_ID
+from config import TTS_VOICE_ID
 
 engine = pyttsx4.init()
-engine.setProperty('voice', VOICE_ID)
+engine.setProperty('voice', TTS_VOICE_ID)
 engine.setProperty('rate', 175)
 
 

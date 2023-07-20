@@ -4,7 +4,7 @@ import json
 
 from queue import Queue
 from vosk import Model, KaldiRecognizer
-from config import WAKE_WORDS, LANGUAGE
+from config import WAKE_WORDS, STT_LANGUAGE
 
 queue = Queue()
 
@@ -12,7 +12,7 @@ samplerate = sd.query_devices(sd.default.device[0], "input")["default_samplerate
 wake_word_collection = ["\"" + word + "\"" for wake_word in WAKE_WORDS for word in wake_word.split(" ")]
 
 # Language Model
-model = Model(lang=LANGUAGE)
+model = Model(lang=STT_LANGUAGE)
 recognizer = KaldiRecognizer(model, samplerate)
 recognizer_idle = KaldiRecognizer(model, samplerate, '[' + ', '.join(wake_word_collection) + ', "[unk]"]')
 

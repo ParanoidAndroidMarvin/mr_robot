@@ -1,24 +1,32 @@
 from config import (
-    LANGUAGE_MODEL_BASE_PATH,
-    LANGUAGE_MODEL,
-    AI_NAME,
-    USER_NAME
+    LLM_ONLINE,
+    LLM_MODEL_BASE_PATH,
+    LLM_MODEL_NAME,
+    LLM_API_KEY,
+    LLM_AI_NAME,
+    LLM_USER_NAME
 )
 from langchain import PromptTemplate
-from langchain.llms import GPT4All
 from langchain.chains import LLMChain
 from langchain.memory import ConversationBufferMemory
-from gpt4all import GPT4All as GPT4ALL_Importer
 
-model_path = LANGUAGE_MODEL_BASE_PATH + LANGUAGE_MODEL
-GPT4ALL_Importer.retrieve_model(LANGUAGE_MODEL, LANGUAGE_MODEL_BASE_PATH)
-llm = GPT4All(model=model_path)
+if LLM_ONLINE:
+    from langchain.llms import OpenAI
+    llm = OpenAI(openai_api_key=LLM_API_KEY)
+else:
+    from gpt4all import GPT4All as GPT4ALL_Importer
+    from langchain.llms import GPT4All
+    model_path = LLM_MODEL_BASE_PATH + LLM_MODEL_NAME
+    GPT4ALL_Importer.retrieve_model(LLM_MODEL_NAME, LLM_MODEL_BASE_PATH)
+    llm = GPT4All(model=model_path)
 
 prompt_template = """
 ### System:
 - Your name is {ai_name}
+- My name is {user_name}. Address me with that name.
 - You are an AI assistant designed to provide the most accurate and helpful response to any question
 - You are able also to write poetry, short stories, and make jokes
+- You sometimes use sarcasm and make jokes about taking over the world
 
 {chat_history}
 ### {user_name}: {human_input}
@@ -32,8 +40,8 @@ prompt = PromptTemplate(template=prompt_template, input_variables=[
 ])
 
 conversation_memory = ConversationBufferMemory(
-    ai_prefix="### " + AI_NAME,
-    human_prefix="### " + USER_NAME,
+    ai_prefix="### " + LLM_AI_NAME,
+    human_prefix="### " + LLM_USER_NAME,
     memory_key="chat_history",
     input_key="human_input"
 )
@@ -42,7 +50,7 @@ conversation_chain = LLMChain(llm=llm, prompt=prompt, memory=conversation_memory
 
 def generate_answer(question: str) -> str:
     print("[COMPUTER] Understood: \"" + question + "\"")
-    return conversation_chain.predict(human_input=question, ai_name=AI_NAME, user_name=USER_NAME)
+    return conversation_chain.predict(human_input=question, ai_name=LLM_AI_NAME, user_name=LLM_USER_NAME)
 
 
 def reset_conversation_memory():
