@@ -3,8 +3,8 @@ from config import (
     LLM_MODEL_BASE_PATH,
     LLM_MODEL_NAME,
     LLM_API_KEY,
-    LLM_AI_NAME,
-    LLM_USER_NAME
+    AI_NAME,
+    USER_NAME
 )
 from langchain import PromptTemplate
 from langchain.chains import LLMChain
@@ -40,8 +40,8 @@ prompt = PromptTemplate(template=prompt_template, input_variables=[
 ])
 
 conversation_memory = ConversationBufferMemory(
-    ai_prefix="### " + LLM_AI_NAME,
-    human_prefix="### " + LLM_USER_NAME,
+    ai_prefix="### " + AI_NAME,
+    human_prefix="### " + USER_NAME,
     memory_key="chat_history",
     input_key="human_input"
 )
@@ -49,8 +49,7 @@ conversation_chain = LLMChain(llm=llm, prompt=prompt, memory=conversation_memory
 
 
 def generate_answer(question: str) -> str:
-    print("[COMPUTER] Understood: \"" + question + "\"")
-    return conversation_chain.predict(human_input=question, ai_name=LLM_AI_NAME, user_name=LLM_USER_NAME)
+    return conversation_chain.predict(human_input=question, ai_name=AI_NAME, user_name=USER_NAME)
 
 
 def reset_conversation_memory():

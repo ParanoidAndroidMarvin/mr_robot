@@ -1,17 +1,14 @@
-from config import BANNER, SLEEP_WORDS
+from config import SLEEP_WORDS
 from text_to_speech import say
 from text_generator import generate_answer, reset_conversation_memory
 from speech_to_text import wait_for_wakeup, listen
-from colorama import Fore, Style
+from output import print_computer, print_banner
 from time import sleep
-
-# Setup console styling
-print(Fore.GREEN + Style.BRIGHT)
 
 
 def main():
     sleep(.5)
-    print(BANNER)
+    print_banner()
     try:
         sleeping = True
         while True:
@@ -32,7 +29,7 @@ def main():
                 continue
 
     except KeyboardInterrupt:
-        print("[COMPUTER] Shutdown")
+        print_computer("Shutdown")
 
 
 if __name__ == '__main__':

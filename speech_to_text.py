@@ -4,7 +4,11 @@ import json
 
 from queue import Queue
 from vosk import Model, KaldiRecognizer
-from config import WAKE_WORDS, STT_LANGUAGE
+from output import print_computer, print_human
+from config import (
+    WAKE_WORDS,
+    STT_LANGUAGE,
+)
 
 queue = Queue()
 
@@ -24,7 +28,7 @@ def _record_callback(indata, frames, time, status):
 
 
 def wait_for_wakeup():
-    print("[COMPUTER] Sleeping...")
+    print_computer("Sleeping...")
     try:
         with sd.RawInputStream(dtype='int16', channels=1, callback=_record_callback):
             while True:
@@ -42,16 +46,17 @@ def wait_for_wakeup():
 
 
 def listen() -> str:
-    print("[COMPUTER] Listening...")
+    print_computer("Listening...")
     try:
         with sd.RawInputStream(dtype='int16', channels=1, callback=_record_callback):
             while True:
                 data = queue.get()
                 if recognizer.AcceptWaveform(data):
                     recognizer_result = recognizer.Result()
-                    result = json.loads(recognizer_result)["text"]
-                    if not result == "":
-                        return result
+                    prompt = json.loads(recognizer_result)["text"]
+                    if not prompt == "":
+                        print_human("\"" + prompt + "\"")
+                        return prompt
 
     except Exception as e:
         print(str(e))

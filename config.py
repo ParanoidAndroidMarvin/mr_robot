@@ -15,6 +15,8 @@ BANNER = """
 ###############
 #   General   #
 ###############
+USER_NAME = "Human"
+AI_NAME = "Computer"
 WAKE_WORDS = ["hey computer", "wake up"]
 SLEEP_WORDS = ["computer go to sleep", "good night"]
 
@@ -26,8 +28,6 @@ STT_LANGUAGE = "en-us"
 ######################
 #   Text generator   #
 ######################
-LLM_USER_NAME = "Human"
-LLM_AI_NAME = "Computer"
 LLM_ONLINE = True
 # Only required if ONLINE = False
 LLM_MODEL_BASE_PATH = "./models/"
